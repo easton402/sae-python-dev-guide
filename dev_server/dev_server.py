@@ -16,6 +16,7 @@ from optparse import OptionParser
 from sae.util import search_file_bottom_up
 
 from sae.channel import _channel_wrapper
+import traceback
 
 app_root = search_file_bottom_up('config.yaml')
 if app_root is None:
@@ -173,8 +174,8 @@ def main(options):
 
     try:
         index = imp.load_source('index', 'index.wsgi')
-    except IOError:
-        print >>sys.stderr, "Seems you don't have an index.wsgi"
+    except:
+        print >>sys.stderr, traceback.format_exc()
         return
     if not hasattr(index, 'application'):
         print >>sys.stderr, "application not found in index.wsgi"

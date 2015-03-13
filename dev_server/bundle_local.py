@@ -45,8 +45,8 @@ def main():
     # Get the dists in requirements.txt
     dists = []
     for line in open(options.requirements, 'r').readlines():
-        if line.strip() or line.startswith('#'):
-            pass
+        if line.strip() == '' or line.startswith('#'):
+            continue
         pkg = line.split('==')[0]
 
         if pkg not in installed_dists:
